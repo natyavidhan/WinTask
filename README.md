@@ -48,4 +48,4 @@ If you want to remove that thask from the complete task section too, then select
 
 If you want to logout from your account the click on the logout button.
 
-![logout](https://github.com/studiousgamer/WinTask/blob/main/images/9.png)
+![logout](https://github.com/studiousgamer/WinTask/blob/main/images/9.PNG)
