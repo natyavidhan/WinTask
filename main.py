@@ -4,11 +4,11 @@ import json
 import sys
 table = ""
 
-cluster = MongoClient('mongodb+srv://Studous_gamer:ilovemymommy@cluster0.oeo70.mongodb.net/Accounts?retryWrites=true&w=majority')
+cluster = MongoClient('mongodb cluster id')
 db = cluster['Accounts']
 acc_table = db['Accounts']
 
-cluster = MongoClient('mongodb+srv://Studous_gamer:ilovemymommy@cluster0.oeo70.mongodb.net/Lists?retryWrites=true&w=majority')
+cluster = MongoClient('mongodb cluster id')
 lists = cluster['Lists']
 import getpass
 import os
