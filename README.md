@@ -45,3 +45,7 @@ Your task will be now under the Complete text.
 If you want to remove that thask from the complete task section too, then select the task and click on the Remove selected button.
 
 ![task remove](https://github.com/studiousgamer/WinTask/blob/main/images/8.png)
+
+If you want to logout from your account the click on the logout button.
+
+![logout](https://github.com/studiousgamer/WinTask/blob/main/images/9.png)
