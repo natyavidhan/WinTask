@@ -41,39 +41,39 @@ class Ui_MainWindow(object):
         global table
         if self.item_to_add.toPlainText() == "":
             return True
-        else:
-            self.noot_done_list.addItem(self.item_to_add.toPlainText())
-            task_table = lists[table]
-            task_table.insert_one({
-                "type": "incomplete",
-                "task": self.item_to_add.toPlainText()
-            })
-            self.item_to_add.setText("")
+        self.noot_done_list.addItem(self.item_to_add.toPlainText())
+        task_table = lists[table]
+        task_table.insert_one({
+            "type": "incomplete",
+            "task": self.item_to_add.toPlainText()
+        })
+        self.item_to_add.setText("")
 
     def work_done(self):
-            items = self.noot_done_list.selectedItems()
+        if items := self.noot_done_list.selectedItems():
+            for item in items:
+                self.noot_done_list.takeItem(self.noot_done_list.row(item))
+                task_table = lists[table]
+                task_table.delete_one({"type":"incomplete",
+                "task":item.text()})
+                self.done_list.addItem(item.text())
+                task_table.insert_one({
+                    "type":"complete",
+                    "task":item.text()
+                })
+
+        else:
             if not items: return
-            else:
-                for item in items:
-                    self.noot_done_list.takeItem(self.noot_done_list.row(item))
-                    task_table = lists[table]
-                    task_table.delete_one({"type":"incomplete",
-                    "task":item.text()})
-                    self.done_list.addItem(item.text())
-                    task_table.insert_one({
-                        "type":"complete",
-                        "task":item.text()
-                    })
     
     def removeSel(self):
-        items = self.done_list.selectedItems()
-        if not items: 
-            return
-        else:
+        if items := self.done_list.selectedItems():
             for item in items:
                 self.done_list.takeItem(self.done_list.row(item))
                 task_table = lists[table]
                 task_table.delete_one({"type":"complete", "task":item.text()})
+
+        else:
+            return
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -297,7 +297,7 @@ class login_ui(object):
             self.label_4.setText("Sucsessful! Now you can close this window")
             self.lineEdit.setText("")
             self.lineEdit_2.setText("")
-        if results == None:
+        if results is None:
             self.label_4.setText("Wrong Username or Password")
 
     def setupUi(self, MainWindow):
@@ -462,10 +462,7 @@ if __name__ == "__main__":
     table = user["table"]
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
-    if user["Username"] == "":
-        ui = logsign_ui()
-    else:
-        ui = Ui_MainWindow()
+    ui = logsign_ui() if user["Username"] == "" else Ui_MainWindow()
     add_to_startup()
     ui.setupUi(MainWindow)
     MainWindow.show()
